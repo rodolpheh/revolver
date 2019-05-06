@@ -1,0 +1,1 @@
+**Building the front page:** `pandoc -o static/index.html -c pandoc.css -s README.md --metadata pagetitle="RevolVer - Revolution Versioning"`

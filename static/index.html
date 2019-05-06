@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>RevolVer - Revolution Versioning</title>
+  <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="pandoc.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="revolver">Revolver</h1>
+<ul>
+<li><a href="#scheme">Scheme</a>
+<ul>
+<li><a href="#can-i-release-quarterly-and-add-the-quarter-in-the-version-number">Can I release quarterly and add the quarter in the version number ?</a></li>
+</ul></li>
+<li><a href="#api">API</a>
+<ul>
+<li><a href="#now">now</a></li>
+<li><a href="#fromiso">from_iso</a></li>
+</ul></li>
+<li><a href="#credits">Credits</a></li>
+</ul>
+<p>Revolver (short for <em>Revolution Versioning</em>) is a versioning scheme inspired by <a href="https://caldev.org">CalDev</a>. It uses a date and time as versioning numbers but it uses the <a href="https://en.wikipedia.org/wiki/French_Republican_calendar">French Republican Calendar</a> (also called the revolutionary calendar in France) for the date with the <a href="https://en.wikipedia.org/wiki/Holocene_calendar">Holocene Calendar</a> for the year, and the <a href="https://en.wikipedia.org/wiki/Decimal_time">Decimal time</a> for the time.</p>
+<h2 id="scheme">Scheme</h2>
+<p>Revolver introduces a simple versioning convention :</p>
+<pre><code>YYYYY[.MM[.DD[-HMM]]]</code></pre>
+<ul>
+<li>YYYYY - (12019, 12020, …) - Year in the <a href="https://en.wikipedia.org/wiki/Holocene_calendar">Holocene Calendar</a>, or the current year in the [Gregorian Calendar] plus 10 000</li>
+<li>MM - (01-12) - Month in the <a href="https://en.wikipedia.org/wiki/French_Republican_calendar">French Republican Calendar</a></li>
+<li>DD - (01-30) - Day in the <a href="https://en.wikipedia.org/wiki/French_Republican_calendar">French Republican Calendar</a></li>
+<li>H - (0-9) - Hour in <a href="https://en.wikipedia.org/wiki/Decimal_time">Decimal time</a></li>
+<li>MM - (00-99) - Minutes in <a href="https://en.wikipedia.org/wiki/Decimal_time">Decimal Time</a></li>
+</ul>
+<p>The format allows flexible release cycles by omitting one or more part. For example, if you plan to release hourly, you may opt for the full <code>YYYYY.MM.DD-HMM</code> but if you plan to release monthy, you could opt for the much simpler <code>YYYYY.MM</code>.</p>
+<h3 id="can-i-release-quarterly-and-add-the-quarter-in-the-version-number">Can I release quarterly and add the quarter in the version number ?</h3>
+<p>What are you ? A <a href="https://www.3ds.com/">multi-million euros company</a> ? No, this versioning scheme does not plan to implement quarters in the version number.</p>
+<h2 id="api">API</h2>
+<h3 id="now">now</h3>
+<p>Returns a version number corresponding to the current time in the format <code>YYYYY.MM.DD-HMM</code>.</p>
+<h3 id="from_iso">from_iso</h3>
+<p>Takes a string in the format of <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>. Returns a version number in the format <code>YYYYY.MM.DD-HMM</code>.</p>
+<h2 id="credits">Credits</h2>
+<ul>
+<li>The RevolVer API uses the <a href="https://github.com/lakhanmankani/metric-time">metric-time</a> library for Python</li>
+<li>The CSS theme for the front page is <a href="http://markedstyle.com/styles/minist">Minist</a> by <a href="http://markedstyle.com/authors/1642">Miguel Bartelsman</a></li>
+</ul>
+<p><a href="https://rodolpheh.pythonanywhere.com/">RevolVer</a> was created with 🤪 by <a href="https://github.com/rodolpheh">rodolpheh</a> - <a href="https://github.com/rodolpheh/revolver">GitHub</a></p>
+</body>
+</html>
