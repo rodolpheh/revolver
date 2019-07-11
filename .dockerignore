@@ -4,3 +4,5 @@ README.md
 *.code-workspace
 Dockerfile
 .dockerignore
+.env/
+.vscode/

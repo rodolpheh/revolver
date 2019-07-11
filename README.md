@@ -1,11 +1,12 @@
 # Revolver
 
-- [Scheme](#scheme)
-  - [Can I release quarterly and add the quarter in the version number ?](#can-i-release-quarterly-and-add-the-quarter-in-the-version-number)
-- [API](#api)
+- [Scheme](#Scheme)
+  - [Can I release quarterly and add the quarter in the version number ?](#Can-I-release-quarterly-and-add-the-quarter-in-the-version-number)
+- [API](#API)
   - [now](#now)
   - [from_iso](#fromiso)
-- [Credits](#credits)
+  - [to_iso](#toiso)
+- [Credits](#Credits)
 
 Revolver (short for *Revolution Versioning*) is a versioning scheme inspired by [CalDev]. It uses a date and time as versioning numbers but it uses the [French Republican Calendar] (also called the revolutionary calendar in France) for the date with the [Holocene Calendar] for the year, and the [Decimal time] for the time.
 
@@ -38,6 +39,10 @@ Returns a version number corresponding to the current time in the format `YYYYY.
 ### from_iso
 
 Takes a string in the format of [ISO 8601]. Returns a version number in the format `YYYYY.MM.DD-HMM`.
+
+### to_iso
+
+Takes a string in the format of [RevolVer]. Returns the date in the [ISO 8601] format.
 
 ## Credits
 
