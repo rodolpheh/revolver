@@ -1,0 +1,6 @@
+.gitignore
+NOTES.md
+README.md
+*.code-workspace
+Dockerfile
+.dockerignore
