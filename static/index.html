@@ -19,16 +19,17 @@
 <body>
 <h1 id="revolver">Revolver</h1>
 <ul>
-<li><a href="#scheme">Scheme</a>
+<li><a href="#Scheme">Scheme</a>
 <ul>
-<li><a href="#can-i-release-quarterly-and-add-the-quarter-in-the-version-number">Can I release quarterly and add the quarter in the version number ?</a></li>
+<li><a href="#Can-I-release-quarterly-and-add-the-quarter-in-the-version-number">Can I release quarterly and add the quarter in the version number ?</a></li>
 </ul></li>
-<li><a href="#api">API</a>
+<li><a href="#API">API</a>
 <ul>
 <li><a href="#now">now</a></li>
 <li><a href="#fromiso">from_iso</a></li>
+<li><a href="#toiso">to_iso</a></li>
 </ul></li>
-<li><a href="#credits">Credits</a></li>
+<li><a href="#Credits">Credits</a></li>
 </ul>
 <p>Revolver (short for <em>Revolution Versioning</em>) is a versioning scheme inspired by <a href="https://caldev.org">CalDev</a>. It uses a date and time as versioning numbers but it uses the <a href="https://en.wikipedia.org/wiki/French_Republican_calendar">French Republican Calendar</a> (also called the revolutionary calendar in France) for the date with the <a href="https://en.wikipedia.org/wiki/Holocene_calendar">Holocene Calendar</a> for the year, and the <a href="https://en.wikipedia.org/wiki/Decimal_time">Decimal time</a> for the time.</p>
 <h2 id="scheme">Scheme</h2>
@@ -49,6 +50,8 @@
 <p>Returns a version number corresponding to the current time in the format <code>YYYYY.MM.DD-HMM</code>.</p>
 <h3 id="from_iso">from_iso</h3>
 <p>Takes a string in the format of <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>. Returns a version number in the format <code>YYYYY.MM.DD-HMM</code>.</p>
+<h3 id="to_iso">to_iso</h3>
+<p>Takes a string in the format of <a href="https://rodolpheh.pythonanywhere.com/">RevolVer</a>. Returns the date in the <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.</p>
 <h2 id="credits">Credits</h2>
 <ul>
 <li>The RevolVer API uses the <a href="https://github.com/lakhanmankani/metric-time">metric-time</a> library for Python</li>
