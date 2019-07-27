@@ -1,5 +1,6 @@
 from flask import Flask, redirect, abort
 from revolver.revolver import Revolver
+import revolver.binary_clock
 
 app = Flask(__name__)
 
@@ -36,6 +37,9 @@ def to_iso(revolver):
     return Revolver(
         int(year_str), int(month_str), int(day_str), hour, minute).iso_date
 
+@app.route('/ansi_clock')
+def ansi_clock():
+    return revolver.binary_clock.ansi_clock(Revolver.now())
 
 @app.errorhandler(403)
 def not_allowed(e):
