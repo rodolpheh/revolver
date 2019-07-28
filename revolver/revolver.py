@@ -3,6 +3,8 @@ import datetime
 from dateutil.parser import isoparse
 import pytz
 
+from convertdate import french_republican, gregorian
+
 year_offset = 11792
 
 
@@ -28,12 +30,12 @@ class Revolver(object):
         return "{}.{:02d}".format(self.year, self.month)
 
     @property
-    def dayly(self):
+    def daily(self):
         return "{}.{:02d}.{:02d}".format(self.year, self.month, self.day)
 
     @property
     def hourly(self):
-        return "{}.{:02d}.{:02d}.{}{:02d}".format(
+        return "{}.{:02d}.{:02d}-{}{:02d}".format(
             self.year, self.month, self.day, self.hour, self.minute)
 
     def __str__(self):
@@ -60,16 +62,13 @@ class Revolver(object):
         #     iso_date = iso_date.astimezone(pytz.timezone('UTC'))
 
         time = metric_time.DecimalTime().decimal_time(iso_date)
-        date = metric_time.RepublicanCalendar().republican_date(iso_date)
-        year = int(date.year) + year_offset
-        if date.month is not None:
-            month = (
-                metric_time.RepublicanCalendar().MONTHS.index(date.month) + 1)
-        else:
-            month = None
+        date = french_republican.from_gregorian(
+            iso_date.year, iso_date.month, iso_date.day)
+
+        year = int(date[0]) + year_offset
 
         revolver = Revolver(
-            year, month, date.day, date.day_of_the_week,
+            year, date[1], date[2], None,
             time.hours, time.minutes)
         return revolver
 
@@ -81,33 +80,8 @@ class Revolver(object):
     @property
     def iso_date(self):
         republican_year = self.year - year_offset
-        year = self.year - year_offset + 1792
-
-        # Calculations source :
-        # https://fr.wikipedia.org/wiki/Concordance_des_dates_des_calendriers_r%C3%A9publicain_et_gr%C3%A9gorien
-
-        temp_date = datetime.datetime(
-            year=year, month=9, day=21, tzinfo=datetime.timezone.utc)
-
-        # If the date is between Ventose 1st and Nivose 11th, subtract one year
-        if self.month < 4 or (self.month == 4 and self.day <= 11):
-            temp_date.year -= 1
-
-            # If the year is a multiple of 4, add a day
-            if republican_year % 4 == 0:
-                temp_date += datetime.timedelta(days=1)
-
-        time_since_sans_culottides = (self.month - 1) * 30 + (self.day - 1)
-
-        temp_date += datetime.timedelta(days=time_since_sans_culottides)
-
-        for century in range(18, int(temp_date.year / 100)):
-            if century % 4 == 0:
-                continue
-            if temp_date > datetime.datetime(
-                    year=temp_date.year, month=2, day=28,
-                    tzinfo=datetime.timezone.utc):
-                temp_date += datetime.timedelta(days=1)
+        temp_date = french_republican.to_gregorian(
+            republican_year, self.month, self.day)
 
         # Compute the time (accurate to 1 minute because we don't keep the
         # seconds in the format)
@@ -115,6 +89,6 @@ class Revolver(object):
         hour = int(minutes / 60)
         minutes = int(minutes) % 60
         date = datetime.datetime(
-            year=year, month=temp_date.month, day=temp_date.day,
+            year=temp_date[0], month=temp_date[1], day=temp_date[2],
             hour=hour, minute=minutes, tzinfo=datetime.timezone.utc)
         return date.isoformat()
