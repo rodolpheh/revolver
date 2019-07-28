@@ -17,8 +17,8 @@ def hello_world():
 @app.route('/now')
 def now():
     revolver = Revolver.now()
-    if revolver.month is None:
-        abort(403, description=revolver.day_of_the_week)
+    # if revolver.month is None:
+    #     abort(403, description=revolver.day_of_the_week)
     return str(revolver)
 
 
@@ -32,8 +32,8 @@ def republican_now():
 @app.route('/from_iso/<date_str>')
 def from_iso(date_str):
     revolver = Revolver.from_iso_str(date_str)
-    if revolver.month is None:
-        abort(403, description=revolver.day_of_the_week)
+    # if revolver.month is None:
+    #     abort(403, description=revolver.day_of_the_week)
     return str(revolver)
 
 

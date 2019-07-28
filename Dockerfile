@@ -1,6 +1,8 @@
 FROM python:alpine 
 
-RUN pip install flask metric_time pytz python-dateutil
+RUN apk add gcc musl-dev
+
+RUN pip install flask metric_time pytz python-dateutil convertdate
 
 COPY . /src/
 
