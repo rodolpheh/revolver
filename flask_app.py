@@ -1,6 +1,8 @@
-from flask import Flask, redirect, abort
+from flask import Flask, abort
 from revolver.revolver import Revolver
 import revolver.binary_clock
+import metric_time as mt
+import datetime as dt
 
 app = Flask(__name__)
 
@@ -20,6 +22,13 @@ def now():
     return str(revolver)
 
 
+@app.route('/republican/now')
+def republican_now():
+    date = mt.RepublicanCalendar().republican_date(
+        dt.datetime.now(dt.timezone.utc))
+    return "{} {} {}".format(date.day, date.month, math.ceil(date.year))
+
+
 @app.route('/from_iso/<date_str>')
 def from_iso(date_str):
     revolver = Revolver.from_iso_str(date_str)
@@ -35,7 +44,8 @@ def to_iso(revolver):
     year_str, month_str, day_str = date_str.split('.')
     hour, minute = int(time_str[0]), int(time_str[1:])
     return Revolver(
-        int(year_str), int(month_str), int(day_str), hour, minute).iso_date
+        int(year_str), int(month_str), int(day_str),
+        None, hour, minute).iso_date
 
 @app.route('/ansi_clock')
 def ansi_clock():
