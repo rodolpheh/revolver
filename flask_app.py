@@ -1,8 +1,8 @@
 from flask import Flask, abort
 from revolver.revolver import Revolver
+import revolver.binary_clock
 import metric_time as mt
 import datetime as dt
-import math
 
 app = Flask(__name__)
 
@@ -47,6 +47,9 @@ def to_iso(revolver):
         int(year_str), int(month_str), int(day_str),
         None, hour, minute).iso_date
 
+@app.route('/ansi_clock')
+def ansi_clock():
+    return revolver.binary_clock.ansi_clock(Revolver.now())
 
 @app.errorhandler(403)
 def not_allowed(e):
