@@ -8,4 +8,6 @@ COPY . /src/
 
 EXPOSE 5000
 
+WORKDIR /src
+
 ENTRYPOINT ["python", "/src/flask_app.py"]
