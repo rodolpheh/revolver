@@ -77,6 +77,17 @@ class Revolver(object):
         now = datetime.datetime.now(pytz.timezone('UTC'))
         return Revolver.from_iso(now)
 
+    @staticmethod
+    def republican_now():
+        now = datetime.datetime.now(pytz.timezone('UTC'))
+        now_republican = french_republican.from_gregorian(
+            now.year, now.month, now.day)
+        return {
+            "year": now_republican[0],
+            "month": french_republican.MOIS[now_republican[1] - 1],
+            "day": now_republican[2]
+        }
+
     @property
     def iso_date(self):
         republican_year = self.year - year_offset
