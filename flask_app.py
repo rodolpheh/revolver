@@ -10,12 +10,23 @@ app = Flask(__name__)
 app.config['SWAGGER'] = {
     'title': 'RevolVer API',
     'uiversion': 3,
-    "version": "0.0.1",
+    "version": "12019.11.19-992",
     "title": "RevolVer API",
     "description": 'This is the API for RevolVer',
-    'hide_top_bar': True
+    'hide_top_bar': True,
+    "specs": [
+        {
+            "endpoint": 'apispec_1',
+            "route": '/apispec_1.json',
+            "rule_filter": lambda rule: True,  # all in
+            "model_filter": lambda tag: True,  # all in
+        }
+    ],
+    "swagger_ui": False
 }
-swagger = Swagger(app)
+swagger = Swagger(app, template={
+    "basePath": "/revolver/api"    
+})
 
 year_offset = 11792
 
