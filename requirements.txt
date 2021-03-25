@@ -19,6 +19,6 @@ pyflakes==2.1.1
 pyrsistent==0.15.4
 python-dateutil==2.8.0
 pytz==2019.1
-PyYAML==5.1.2
+PyYAML==5.4
 six==1.12.0
 Werkzeug==0.15.5
